@@ -26,7 +26,7 @@ CREATE TABLE Hotels (
 	id        integer,
 	nom       VARCHAR(100),
 	adresse   text,
-	nbChambre smallint,
+	nbChambre smallint, # vraiment utile ?
 
 	CONSTRAINT pk_Hotels PRIMARY KEY(id)
 
@@ -39,7 +39,7 @@ CREATE TABLE Chambres (
 	hotel         integer,
 	nbLitSimple   smallint DEFAULT 0,
 	nbLitDouble   smallint DEFAULT 0,
-	prix          integer,
+	prix          money,
 	gammeChambre  VARCHAR(100),
 	etage         smallint,
 

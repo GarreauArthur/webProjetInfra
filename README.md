@@ -2,6 +2,11 @@
 
 Partie web/php du projet infra/java/web intro i2 ESEO
 
+## Database
+
+* Pour créer la base de données : create.sql
+* Pour insérer des données : insert.sql
+
 
 ## Postgresql
 
