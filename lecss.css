@@ -1,0 +1,32 @@
+body{
+	margin:auto;
+	width: 760px;
+}
+.hotel{
+	background-color: #6161ff;
+	width:240px;
+	min-height: 250px;
+	text-align: center;
+	color:white;
+	display: inline-block;
+	vertical-align: top;
+	margin:5px;
+}
+.fa-hotel{font-size: 100px}
+header{
+	text-align: center;
+}
+a{
+	text-decoration:none;
+}
+#listHotels{
+	margin:auto;
+	display: flex;
+	flex-wrap:wrap;
+}
+.chambre{
+	background-color: #fb3f3f;
+	color:white;
+	margin:5px;
+	padding: 5px;
+}
