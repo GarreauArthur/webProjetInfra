@@ -29,3 +29,9 @@ Lister tables :
 Décrire un table :
 
 	\d+ tablename
+
+## Fonctionnement
+
+Parce que je veux faire ça rapidement sans trop réfléchir, les informations sont sélectionnées grâce à différentes pages php :
+
+![startegy](./strategy.png)
