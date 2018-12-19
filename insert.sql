@@ -11,7 +11,7 @@ VALUES
 INSERT INTO Hotels
 (id, nom      , adresse                         )
 VALUES
-(1 , 'Hothell', '29 rue des blagpatrédrol'      ),
+(1 , 'Tothell', '29 rue des blagpatrédrol'      ),
 (2 , 'Hekel'  , '2 street of hekistant'         ),
 (3 , 'Otello' , '23 boulevard Charles Allemagne'),
 (4 , 'Hothell', '-18 avenue de yfaicho'         )
