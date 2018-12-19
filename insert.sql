@@ -21,8 +21,8 @@ VALUES
 INSERT INTO Chambres
 (numeroChambre, hotel, nbLitSimple, nbLitDouble, prix , gammeChambre, etage)
 VALUES
-(1            , 1    , 1          , 0           , 2   , 'cheap'     , 1    ),
-(2            , 1    , 0          , 1           , 4   , 'cheap'     , 1    ),
+(1            , 1    , 1          , 0           , 20  , 'cheap'     , 1    ),
+(2            , 1    , 0          , 1           , 40  , 'cheap'     , 1    ),
 (3            , 2    , 1          , 0           , 200 , 'midlle'    , 2    ),
 (4            , 2    , 2          , 0           , 350 , 'plus'      , 3    ),
 (5            , 2    , 1          , 1           , 90  , 'nice'      , 4    ),
