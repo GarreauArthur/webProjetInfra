@@ -51,8 +51,8 @@ if( $nbAvailable == 0) : ?>
 			<form method="POST" action="reservation.php">
 				<input type="hidden" name="hotel"     value="<?= $val["hotel"]; ?>">
 				<input type="hidden" name="chambre"   value="<?= $val["numerochambre"]; ?>">
-				<input type="hidden" name="dateDebut" value="<?= $_POST["dateStart"]; ?>">
-				<input type="hidden" name="dateFin"   value="<?= $_POST["dateEnd"]; ?>">
+				<input type="hidden" name="dateDebut" value="<?= htmlspecialchars($_POST["dateStart"]); ?>">
+				<input type="hidden" name="dateFin"   value="<?= htmlspecialchars($_POST["dateEnd"]); ?>">
 				<input type="submit" value="Réserver">
 			</form>
 	    </div>			

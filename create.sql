@@ -10,7 +10,7 @@ DROP TABLE Clients;
 
 CREATE TABLE Clients (
 
-	id        integer,
+	id        serial,
 	prenom    VARCHAR(50),
 	nom       VARCHAR(100) NOT NULL,
 	mail      VARCHAR(256),
@@ -23,10 +23,10 @@ CREATE TABLE Clients (
 
 CREATE TABLE Hotels (
 
-	id        integer,
+	id        serial,
 	nom       VARCHAR(100),
 	adresse   text,
-	nbChambre smallint, # vraiment utile ?
+	nbChambre smallint,
 
 	CONSTRAINT pk_Hotels PRIMARY KEY(id)
 
@@ -50,7 +50,7 @@ CREATE TABLE Chambres (
 
 CREATE TABLE Reservations (
 
-	id        integer,
+	id        serial,
 	dateDebut timestamp,
 	dateFIn   timestamp,
 	client    integer,
