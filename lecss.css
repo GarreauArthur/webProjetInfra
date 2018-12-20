@@ -30,3 +30,17 @@ a{
 	margin:5px;
 	padding: 5px;
 }
+.infos{
+	display: block;
+	box-sizing: border-box;
+	border: 1px solid #eeeeee;
+	margin:5px;
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 16px;
+	padding: 10px;
+	transition: box-shadow 0.3s ease 0s, border 0.3s ease 0s;
+	width: 100%;
+	display: inline-block;
+	vertical-align: top;
+	background-color: #fbfbfb;
+}
