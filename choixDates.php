@@ -6,6 +6,26 @@ if(EMPTY($_GET["hotel"]) || !is_numeric($_GET["hotel"]))
 	header('Location: ./index.php');
 }
 
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Choix dates</title>
+	<link rel="stylesheet" type="text/css" href="./lecss.css">
+</head>
+<body>
+
+<?php
+if (!EMPTY($_GET["msg"]) && $_GET["msg"]=="error"){
+?>
+	<h1 style="color: red"> Erreur : dates invalides, veuillez en choisir de nouvelles.</h1>
+<?php
+}
+
+
+
 // on se connecte à la base de données
 include_once('./dbconnection.php');
 // on récupère les infos
@@ -20,14 +40,7 @@ if($stm->rowCount() != 1)
 $res = $stm->fetch();
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Choix dates</title>
-	<link rel="stylesheet" type="text/css" href="./lecss.css">
-</head>
-<body>
+
 	<header>
 		<h1>Get the best experience in our hotels</h1>
 		<h2>Select the dates</h2>

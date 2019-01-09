@@ -8,6 +8,19 @@ if ( EMPTY($_POST["hotel"])     || !is_numeric($_POST["hotel"])
 	header('Location: ./index.php');
 }
 
+else {
+	echo '<h2>Vous avez choisi l\'hotel '.$_POST["hotel"].' du '.$_POST["dateStart"].' au '.$_POST["dateEnd"].'.</h2>';
+
+	// TEST : date de début inférieur à date de fin
+
+	$dateStart=new DateTime($_POST["dateStart"]);
+	$dateEnd=new DateTime($_POST["dateEnd"]);
+	
+	if ($dateStart >= $dateEnd){
+		header('Location: ./choixDates.php?hotel='.$_POST["hotel"].'&msg=error');
+	}
+}
+
 // on se connecte à la base de données
 include_once('./dbconnection.php');
 // on récupère les infos
