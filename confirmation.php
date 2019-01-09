@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-          // s'il n'y a pas de paramètre, ou si c'est une mauvaise valeur
+// s'il n'y a pas de paramètre, ou si c'est une mauvaise valeur
 if ( EMPTY($_POST["hotel"])     || !is_numeric($_POST["hotel"])
   || EMPTY($_POST["dateDebut"]) || EMPTY($_POST["dateFin"])
   || EMPTY($_POST["chambre"])   || EMPTY($_POST["nom"])
@@ -17,6 +17,42 @@ if ( EMPTY($_POST["hotel"])     || !is_numeric($_POST["hotel"])
 // on se connecte à la base de données
 include_once('./dbconnection.php');
 
+// on vérifie que personne n'a réservé la chambre entre temps
+$numeroChambre = $connection->prepare("SELECT numeroChambre FROM Chambres WHERE hotel = :hotel AND numeroChambre NOT IN (SELECT chambre FROM Reservations WHERE hotel = :hotel AND (dateDebut < :dEnd) AND (dateFin > :dStart ))");
+$numeroChambre->execute(array(
+	                ':hotel'   => $_POST["hotel"],
+	                ':dStart'  => $_POST["dateDebut"],
+	                ':dEnd'  => $_POST["dateFin"]
+                    )
+			 );
+$numeroChambreDisponible = $numeroChambre->fetchAll(); // récupération des numéros de chambres disponible à cet hôtel 
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Confirmation</title>
+	<link rel="stylesheet" type="text/css" href="./lecss.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+</head>
+<body>
+
+<?php
+
+$estDisponible=false;
+
+foreach ($numeroChambreDisponible as $numero){
+    if ($numero["numerochambre"] == $_POST["chambre"]){
+		$estDisponible=true;
+	}
+}
+
+if( !$estDisponible) : ?>
+	<h1>Dommage ! Quelqu'un a réservé cette chambre pendant que vous vous identifiiez...</h1>
+	<a href="choixDates.php?hotel=<?php echo $_POST["hotel"]?>">Choisir de nouvelles dates</a>
+
+<?php else : 
 
 /*
 
@@ -109,18 +145,7 @@ catch ( Exception $e ) {
 	$error = true;
 }
    
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<link rel="stylesheet" type="text/css" href="./lecss.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-</head>
-<body>
-
-<?php if ( $error ) : ?>
+if ( $error ) : ?>
 	<h1>ERREUR</h1>
 	<h2>Il y a eu une erreur veuillez <a href="index.php">recommencer</a></h2>
 <?php else : ?>
@@ -131,7 +156,8 @@ catch ( Exception $e ) {
 	<p> Son prix est de <?php echo $prixChambre["prix"]?>.</p>
 	<p> L'équipe <strong>Bangaloducul</strong> vous souhaite un bon séjour !</p>
 
-<?php endif; ?>
+<?php endif;
+endif;?>
 
 
 </body>
