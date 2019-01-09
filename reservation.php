@@ -20,7 +20,33 @@ $stm->execute(array(
 	                ':hotel'   => $_POST["hotel"],
 	                ':chambre'  => $_POST["chambre"]
                     )
-             );
+			 );
+			 
+// On récupère le nom de l'hotel
+
+$hotel = $connection->prepare("SELECT nom FROM Hotels WHERE id = :hotel");
+$hotel->execute(array(
+	':hotel' => $_POST["hotel"]
+	)
+);
+$nomHotel = $hotel->fetch();
+
+// On récupère le prix de la chambre
+
+$prix = $connection->prepare("SELECT prix FROM Chambres WHERE hotel = :hotel AND numeroChambre = :chambre");
+$prix->execute(array(
+	':hotel'   => $_POST["hotel"],
+	':chambre' => $_POST["chambre"]
+	)
+);
+$prixChambre = $prix->fetch();
+
+// On reformate les dates de dbt et de fin 
+
+$dateDebut = $_POST["dateDebut"];
+$dateDebutReformate = date("d-m-Y", strtotime($dateDebut));
+$dateFin = $_POST["dateFin"];
+$dateFinReformate = date("d-m-Y", strtotime($dateFin));
 
 ?>
 <!DOCTYPE html>
@@ -32,6 +58,10 @@ $stm->execute(array(
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
 <body>
+	<h1> Votre réservation :</h1>
+	<p> Vous avez choisi la chambre <?php echo $_POST["chambre"]?> de l'hôtel <?php echo $nomHotel["nom"]?> !</p>
+	<p> Date de réservation : <?php echo $dateDebutReformate?> à <?php echo $dateFinReformate?>.</p>
+	<p> Prix à payer : <?php echo $prixChambre["prix"]?>.</p>
 	<h1>Confirmer la réservation</h1>
 	<!-- TODO récap réservation -->
 	<form action="confirmation.php" method="POST">

@@ -9,8 +9,7 @@ if ( EMPTY($_POST["hotel"])     || !is_numeric($_POST["hotel"])
 }
 
 else {
-	echo '<h2>Vous avez choisi l\'hotel '.$_POST["hotel"].' du '.$_POST["dateStart"].' au '.$_POST["dateEnd"].'.</h2>';
-
+	
 	// TEST : date de début inférieur à date de fin
 
 	$dateStart=new DateTime($_POST["dateStart"]);
