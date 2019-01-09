@@ -19,8 +19,8 @@ $res = $query->fetchAll()
 
 
 	<header>
-		<h1>Get the best experience in our hotels</h1>
-		<h2>Pick the one you want to stay in</h2>
+		<h1>Obtenez la meilleure expérience dans nos hôtels</h1>
+		<h2>Choisissez celui dans lequel vous voulez rester</h2>
 	</header>
 
 	<div id="listHotels"><!--

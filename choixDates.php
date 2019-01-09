@@ -42,14 +42,14 @@ $res = $stm->fetch();
 ?>
 
 	<header>
-		<h1>Get the best experience in our hotels</h1>
-		<h2>Select the dates</h2>
+		<h1>Obtenez la meilleure expérience dans nos hôtels</h1>
+		<h2>Sélectionnez vos dates de réservation</h2>
 		<!-- adds info about the hotel -->
 	</header>
 	<form method="POST" action="chambres.php">
 		<input type="hidden" name="hotel" value="<?= $res["id"]; ?>">
-		Date start : <input type="date" name="dateStart">
-		Date end : <input type="date" name="dateEnd">
+		Date de début : <input type="date" name="dateStart">
+		Date de fin : <input type="date" name="dateEnd">
 		<input type="submit">
 	</form>
 </body>

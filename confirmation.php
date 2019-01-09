@@ -73,6 +73,32 @@ try {
 		}
 		else {
 			$connection->commit();
+
+			// On récupère le prix de la chambre
+
+			$prix = $connection->prepare("SELECT prix FROM Chambres WHERE hotel = :hotel AND numeroChambre = :chambre");
+			$prix->execute(array(
+				':hotel'   => $_POST["hotel"],
+				':chambre' => $_POST["chambre"]
+				)
+			);
+			$prixChambre = $prix->fetch();
+
+			// On récupère le nom de l'hotel
+
+			$hotel = $connection->prepare("SELECT nom FROM Hotels WHERE id = :hotel");
+			$hotel->execute(array(
+				':hotel' => $_POST["hotel"]
+				)
+			);
+			$nomHotel = $hotel->fetch();
+
+			// On reformate les dates de dbt et de fin 
+
+			$dateDebut = $_POST["dateDebut"];
+			$dateDebutReformate = date("d-m-Y", strtotime($dateDebut));
+			$dateFin = $_POST["dateFin"];
+			$dateFinReformate = date("d-m-Y", strtotime($dateFin));
 		}
 
 	}
@@ -89,6 +115,8 @@ catch ( Exception $e ) {
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="./lecss.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
 <body>
 
@@ -97,6 +125,12 @@ catch ( Exception $e ) {
 	<h2>Il y a eu une erreur veuillez <a href="index.php">recommencer</a></h2>
 <?php else : ?>
 	<h1>Votre réservation a été enregistrée</h1>
+	<h2> Détail de réservation :</h2>
+	<p> Vous avez choisi la chambre <?php echo $_POST["chambre"]?> de l'hôtel <?php echo $nomHotel["nom"]?> !</p>
+	<p> Vous l'avez réservé au nom de <strong><?php echo $_POST["prenom"]?> <?php echo $_POST["nom"]?></strong> du <?php echo $dateDebutReformate?> au <?php echo $dateFinReformate?>.</p>
+	<p> Son prix est de <?php echo $prixChambre["prix"]?>.</p>
+	<p> L'équipe <strong>Bangaloducul</strong> vous souhaite un bon séjour !</p>
+
 <?php endif; ?>
 
 
