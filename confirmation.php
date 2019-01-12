@@ -110,25 +110,6 @@ try {
 		else {
 			$connection->commit();
 
-			// On récupère le prix de la chambre
-
-			$prix = $connection->prepare("SELECT prix FROM Chambres WHERE hotel = :hotel AND numeroChambre = :chambre");
-			$prix->execute(array(
-				':hotel'   => $_POST["hotel"],
-				':chambre' => $_POST["chambre"]
-				)
-			);
-			$prixChambre = $prix->fetch();
-
-			// On récupère le nom de l'hotel
-
-			$hotel = $connection->prepare("SELECT nom FROM Hotels WHERE id = :hotel");
-			$hotel->execute(array(
-				':hotel' => $_POST["hotel"]
-				)
-			);
-			$nomHotel = $hotel->fetch();
-
 			// On reformate les dates de dbt et de fin 
 
 			$dateDebut = $_POST["dateDebut"];
@@ -151,9 +132,9 @@ if ( $error ) : ?>
 <?php else : ?>
 	<h1>Votre réservation a été enregistrée</h1>
 	<h2> Détail de réservation :</h2>
-	<p> Vous avez choisi la chambre <?php echo $_POST["chambre"]?> de l'hôtel <?php echo $nomHotel["nom"]?> !</p>
+	<p> Vous avez choisi la chambre <?php echo $_POST["chambre"]?> de l'hôtel <?php echo $_POST["nomHotel"]?> !</p>
 	<p> Vous l'avez réservé au nom de <strong><?php echo $_POST["prenom"]?> <?php echo $_POST["nom"]?></strong> du <?php echo $dateDebutReformate?> au <?php echo $dateFinReformate?>.</p>
-	<p> Son prix est de <?php echo $prixChambre["prix"]?>.</p>
+	<p> Son prix est de <?php echo $_POST["prixTotal"]?>.</p>
 	<p> L'équipe <strong>Bangaloducul</strong> vous souhaite un bon séjour !</p>
 
 <?php endif;

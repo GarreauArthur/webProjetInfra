@@ -9,13 +9,21 @@ if ( EMPTY($_POST["hotel"])     || !is_numeric($_POST["hotel"])
 }
 
 else {
-	
-	// TEST : date de début inférieur à date de fin
 
-	$dateStart=new DateTime($_POST["dateStart"]);
-	$dateEnd=new DateTime($_POST["dateEnd"]);
+	// On transforme les 2 dates en timestamp
+	$dateStart = strtotime($_POST["dateStart"]);
+	$dateEnd = strtotime($_POST["dateEnd"]);
 	
-	if ($dateStart >= $dateEnd){
+	// On récupère la différence de timestamp entre les 2 précédents
+	$nbNuitsTimestamp = $dateEnd - $dateStart;
+	
+	// ** Pour convertir le timestamp (exprimé en secondes) en nuits **
+	// On sait que 1 heure = 60 secondes * 60 minutes et que 1 jour = 24 heures donc :
+	$nbNuits = $nbNuitsTimestamp/86400; // 86 400 = 60*60*24
+	
+	// TEST : date de début inférieur à date de fin -> message d'erreur
+	
+	if ($nbNuits < 0){
 		header('Location: ./choixDates.php?hotel='.$_POST["hotel"].'&msg=error');
 	}
 }
@@ -49,6 +57,12 @@ if( $nbAvailable == 0) : ?>
 <?php else : 
 	echo '<h1>Il y a '.$nbAvailable.' chambre(s) disponible(s)</h1>';
 	$res = $stm->fetchAll();
+	function toInt($str) // fonction qui transforme un prix (money) en nombre (int)
+	{
+		return preg_replace("/([^0-9\\.])/i", "", $str);
+	}
+	setlocale(LC_MONETARY, 'en_US'); // pour les dolls
+	
 	foreach ($res as $val) { ?>
 
 		<div class="chambre">
@@ -57,6 +71,7 @@ if( $nbAvailable == 0) : ?>
 			nbLitSimple : <?= $val["nblitsimple"]; ?><br>
 			nbLitDouble : <?= $val["nblitdouble"]; ?><br>
 			prix : <?= $val["prix"]; ?><br>
+			prix total pour <?= $nbNuits; ?> nuits : <?= $prixTotal = money_format('%.2n',toInt($val["prix"])*$nbNuits); ?><br>
 			gammeChambre : <?= $val["gammechambre"]; ?><br>
 			etage: <?= $val["etage"]; ?><br>
 
@@ -65,6 +80,7 @@ if( $nbAvailable == 0) : ?>
 				<input type="hidden" name="chambre"   value="<?= $val["numerochambre"]; ?>">
 				<input type="hidden" name="dateDebut" value="<?= htmlspecialchars($_POST["dateStart"]); ?>">
 				<input type="hidden" name="dateFin"   value="<?= htmlspecialchars($_POST["dateEnd"]); ?>">
+				<input type="hidden" name="prixTotal" value="<?= $prixTotal; ?>">
 				<input type="submit" value="Réserver">
 			</form>
 	    </div>			

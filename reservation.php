@@ -31,16 +31,6 @@ $hotel->execute(array(
 );
 $nomHotel = $hotel->fetch();
 
-// On récupère le prix de la chambre
-
-$prix = $connection->prepare("SELECT prix FROM Chambres WHERE hotel = :hotel AND numeroChambre = :chambre");
-$prix->execute(array(
-	':hotel'   => $_POST["hotel"],
-	':chambre' => $_POST["chambre"]
-	)
-);
-$prixChambre = $prix->fetch();
-
 // On reformate les dates de dbt et de fin 
 
 $dateDebut = $_POST["dateDebut"];
@@ -61,7 +51,7 @@ $dateFinReformate = date("d-m-Y", strtotime($dateFin));
 	<h1> Votre réservation :</h1>
 	<p> Vous avez choisi la chambre <?php echo $_POST["chambre"]?> de l'hôtel <?php echo $nomHotel["nom"]?> !</p>
 	<p> Date de réservation : <?php echo $dateDebutReformate?> à <?php echo $dateFinReformate?>.</p>
-	<p> Prix à payer : <?php echo $prixChambre["prix"]?>.</p>
+	<p> Prix à payer : <?php echo $_POST["prixTotal"]?>.</p>
 	<h1>Confirmer la réservation</h1>
 	<!-- TODO récap réservation -->
 	<form action="confirmation.php" method="POST">
@@ -69,6 +59,8 @@ $dateFinReformate = date("d-m-Y", strtotime($dateFin));
 		<input type="hidden" name="chambre"   value="<?= htmlspecialchars($_POST["chambre"]); ?>">
 		<input type="hidden" name="dateDebut" value="<?= htmlspecialchars($_POST["dateDebut"]); ?>">
 		<input type="hidden" name="dateFin"   value="<?= htmlspecialchars($_POST["dateFin"]); ?>">
+		<input type="hidden" name="prixTotal" value="<?= $_POST["prixTotal"]; ?>">
+		<input type="hidden" name="nomHotel" value="<?= $nomHotel["nom"]; ?>">
 		<input class="infos" type="text" name="nom" placeholder="Nom">
 		<input class="infos" type="text" name="prenom" placeholder="Prenom">
 		<input class="infos" type="text" name="mail" placeholder="Mail">
