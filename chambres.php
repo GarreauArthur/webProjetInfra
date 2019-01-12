@@ -20,10 +20,15 @@ else {
 	// ** Pour convertir le timestamp (exprimé en secondes) en nuits **
 	// On sait que 1 heure = 60 secondes * 60 minutes et que 1 jour = 24 heures donc :
 	$nbNuits = $nbNuitsTimestamp/86400; // 86 400 = 60*60*24
+
+	// Date d'aujourd'hui
+
+	$dateNow = strtotime("now");
 	
-	// TEST : date de début inférieur à date de fin -> message d'erreur
+	// TEST : date de début supérieur à date de fin -> message d'erreur
+	// TEST : date de début ou de fin inférieure(s) à celle d'aujourd'hui -> message d'erreur
 	
-	if ($nbNuits < 0){
+	if ($nbNuits < 0 || $dateStart < $dateNow || $dateEnd < $dateNow){
 		header('Location: ./choixDates.php?hotel='.$_POST["hotel"].'&msg=error');
 	}
 }
