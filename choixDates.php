@@ -24,8 +24,6 @@ if (!EMPTY($_GET["msg"]) && $_GET["msg"]=="error"){
 <?php
 }
 
-
-
 // on se connecte à la base de données
 include_once('./dbconnection.php');
 // on récupère les infos

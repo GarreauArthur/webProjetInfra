@@ -28,7 +28,7 @@ else {
 	// TEST : date de début supérieur à date de fin -> message d'erreur
 	// TEST : date de début ou de fin inférieure(s) à celle d'aujourd'hui -> message d'erreur
 	
-	if ($nbNuits < 0 || $dateStart < $dateNow || $dateEnd < $dateNow){
+	if ($nbNuits < 0 || $dateStart < $dateNow || $dateEnd < $dateNow){ //problème !!! On ne peut pas réserver pour le soir même !
 		header('Location: ./choixDates.php?hotel='.$_POST["hotel"].'&msg=error');
 	}
 }
