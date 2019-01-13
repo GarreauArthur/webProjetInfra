@@ -11,7 +11,7 @@ if ( EMPTY($_POST["hotel"])     || !is_numeric($_POST["hotel"])
 )
 {
 	// on retourne à la page d'accueil
-	header('Location: ./index.php');
+	echo "you've fucked it up mate";
 }
 
 // on se connecte à la base de données

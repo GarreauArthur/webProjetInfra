@@ -39,6 +39,65 @@ $dateFin = $_POST["dateFin"];
 $dateFinReformate = date("d-m-Y", strtotime($dateFin));
 
 ?>
+
+<script type="text/javascript">
+
+function surligne(champ, erreur) //colorie en rouge les champs invalides
+{
+   if(erreur)
+      champ.style.backgroundColor = "#fba";
+   else
+      champ.style.backgroundColor = "";
+}
+
+function verifText(champ) //vérification champs prenom, nom et téléphone
+{
+   if(champ.value.length < 2 || champ.value.length > 25)
+   {
+      surligne(champ, true);
+      return false;
+   }
+   else
+   {
+      surligne(champ, false);
+      return true;
+   }
+}
+
+function verifMail(champ) //vérification champs mail
+{
+   var regex = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/;
+   if(!regex.test(champ.value))
+   {
+      surligne(champ, true);
+      return false;
+   }
+   else
+   {
+      surligne(champ, false);
+      return true;
+   }
+}
+
+function verifForm(f) //fonction qui vérifie tous les champs
+{
+   var nomOk = verifText(f.nom);
+   var prenomOk = verifText(f.prenom);
+   var mailOk = verifMail(f.mail);
+   var telephoneOk = verifText(f.telephone);
+   
+   if(nomOk && prenomOk && mailOk && telephoneOk)
+      return true;
+   else
+   {
+      alert("Veuillez remplir correctement tous les champs");
+      return false;
+   }
+}
+ 
+</script>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,18 +112,17 @@ $dateFinReformate = date("d-m-Y", strtotime($dateFin));
 	<p> Date de réservation : <?php echo $dateDebutReformate?> à <?php echo $dateFinReformate?>.</p>
 	<p> Prix à payer : <?php echo $_POST["prixTotal"]?>.</p>
 	<h1>Confirmer la réservation</h1>
-	<!-- TODO récap réservation -->
-	<form action="confirmation.php" method="POST">
-		<input type="hidden" name="hotel"     value="<?= htmlspecialchars($_POST["hotel"]); ?>">
-		<input type="hidden" name="chambre"   value="<?= htmlspecialchars($_POST["chambre"]); ?>">
+	<form action="confirmation.php" method="POST" onsubmit="return verifForm(this)"> 
+		<input type="hidden" name="hotel" value="<?= htmlspecialchars($_POST["hotel"]); ?>">
+		<input type="hidden" name="chambre" value="<?= htmlspecialchars($_POST["chambre"]); ?>">
 		<input type="hidden" name="dateDebut" value="<?= htmlspecialchars($_POST["dateDebut"]); ?>">
-		<input type="hidden" name="dateFin"   value="<?= htmlspecialchars($_POST["dateFin"]); ?>">
+		<input type="hidden" name="dateFin" value="<?= htmlspecialchars($_POST["dateFin"]); ?>">
 		<input type="hidden" name="prixTotal" value="<?= $_POST["prixTotal"]; ?>">
 		<input type="hidden" name="nomHotel" value="<?= $nomHotel["nom"]; ?>">
-		<input class="infos" type="text" name="nom" placeholder="Nom">
-		<input class="infos" type="text" name="prenom" placeholder="Prenom">
-		<input class="infos" type="text" name="mail" placeholder="Mail">
-		<input class="infos" type="text" name="telephone" placeholder="Telephone">
+		<input class="infos" type="text" name="nom" placeholder="Nom" onblur="verifText(this)" />
+		<input class="infos" type="text" name="prenom" placeholder="Prenom" onblur="verifText(this)" />
+		<input class="infos" type="text" name="mail" placeholder="Mail" onblur="verifMail(this)" />
+		<input class="infos" type="text" name="telephone" placeholder="Telephone" onblur="verifText(this)">
 		<input type="submit" value="Confirmer la réservation">
 	</form>
 </body>
