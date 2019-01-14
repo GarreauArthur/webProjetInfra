@@ -46,9 +46,25 @@ $res = $stm->fetch();
 	</header>
 	<form method="POST" action="chambres.php">
 		<input type="hidden" name="hotel" value="<?= $res["id"]; ?>">
-		Date de début : <input type="date" name="dateStart">
-		Date de fin : <input type="date" name="dateEnd">
+		Date de début : <input id="dateDbt" type="date" name="dateStart" min="<?php echo date('Y-m-d');?>">
+		Date de fin : <input id="dateFin" type="date" name="dateEnd">
 		<input type="submit">
 	</form>
+
+	<script>
+		function addDays(date, days) { // On ajoute un jour à la date de dbt pour connaitre la date minimum de fin de séjour
+			var result = new Date(date);
+			result.setDate(result.getDate() + days);
+			return result;
+		}
+		var dateDbt = document.getElementById("dateDbt");
+		var dateFin = document.getElementById("dateFin");
+		dateDbt.addEventListener("input", function (e){
+			console.log("bla");
+			dateFin.min = addDays(dateDbt.value, 1).toISOString().substring(0,10);
+			console.log(dateFin.min);
+		});
+	</script>
+
 </body>
 </html>

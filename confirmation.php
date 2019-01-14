@@ -14,6 +14,8 @@ if ( EMPTY($_POST["hotel"])     || !is_numeric($_POST["hotel"])
 	header('Location: ./index.php');
 }
 
+include_once('./mail.php');
+
 // on se connecte à la base de données
 include_once('./dbconnection.php');
 
