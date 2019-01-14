@@ -1,7 +1,8 @@
 <?php
+session_start();
 // s'il n'y a pas de paramètre, ou si c'est une mauvaise valeur
-if ( EMPTY($_POST["hotel"])     || !is_numeric($_POST["hotel"])
-  || EMPTY($_POST["dateDebut"]) || EMPTY($_POST["dateFin"])
+if ( EMPTY($_SESSION["hotel"])     || !is_numeric($_SESSION["hotel"])
+  || EMPTY($_SESSION["dateDebut"]) || EMPTY($_SESSION["dateFin"])
   || EMPTY($_POST["chambre"])
 )
 {
@@ -17,7 +18,7 @@ $stm = $connection->prepare(
 	." WHERE chambres.hotel = :hotel AND chambres.numeroChambre = :chambre"
 );
 $stm->execute(array(
-	                ':hotel'   => $_POST["hotel"],
+	                ':hotel'   => $_SESSION["hotel"],
 	                ':chambre'  => $_POST["chambre"]
                     )
 			 );
@@ -26,20 +27,44 @@ $stm->execute(array(
 
 $hotel = $connection->prepare("SELECT nom FROM Hotels WHERE id = :hotel");
 $hotel->execute(array(
-	':hotel' => $_POST["hotel"]
+	':hotel' => $_SESSION["hotel"]
 	)
 );
 $nomHotel = $hotel->fetch();
 
 // On reformate les dates de dbt et de fin 
 
-$dateDebut = $_POST["dateDebut"];
+$dateDebut = $_SESSION["dateDebut"];
 $dateDebutReformate = date("d-m-Y", strtotime($dateDebut));
-$dateFin = $_POST["dateFin"];
+$dateFin = $_SESSION["dateFin"];
 $dateFinReformate = date("d-m-Y", strtotime($dateFin));
 
+// on stocke les variables dans la session
+$_SESSION["chambre"]   = $_POST["chambre"];
+$_SESSION["prixTotal"] = $_POST["prixTotal"];
+$_SESSION["nomHotel"]  = $nomHotel["nom"];
 ?>
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>One more step</title>
+	<link rel="stylesheet" type="text/css" href="./lecss.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+</head>
+<body>
+	<h1> Votre réservation :</h1>
+	<p> Vous avez choisi la chambre <?php echo htmlspecialchars($_POST["chambre"])?> de l'hôtel <?php echo $nomHotel["nom"]?> !</p>
+	<p> Date de réservation : <?php echo $dateDebutReformate?> à <?php echo $dateFinReformate?>.</p>
+	<p> Prix à payer : <?php echo htmlspecialchars($_POST["prixTotal"]) ?>.</p>
+	<h1>Confirmer la réservation</h1>
+	<form action="confirmation.php" method="POST" onsubmit="return verifForm(this)">
+		<input class="infos" type="text" name="nom" placeholder="Nom" onblur="verifText(this)" />
+		<input class="infos" type="text" name="prenom" placeholder="Prenom" onblur="verifText(this)" />
+		<input class="infos" type="text" name="mail" placeholder="Mail" onblur="verifMail(this)" />
+		<input class="infos" type="text" name="telephone" placeholder="Telephone" onblur="verifText(this)">
+		<input type="submit" value="Confirmer la réservation">
+	</form>
 <script type="text/javascript">
 
 function surligne(champ, erreur) //colorie en rouge les champs invalides
@@ -97,33 +122,5 @@ function verifForm(f) //fonction qui vérifie tous les champs
  
 </script>
 
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>One more step</title>
-	<link rel="stylesheet" type="text/css" href="./lecss.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-</head>
-<body>
-	<h1> Votre réservation :</h1>
-	<p> Vous avez choisi la chambre <?php echo $_POST["chambre"]?> de l'hôtel <?php echo $nomHotel["nom"]?> !</p>
-	<p> Date de réservation : <?php echo $dateDebutReformate?> à <?php echo $dateFinReformate?>.</p>
-	<p> Prix à payer : <?php echo $_POST["prixTotal"]?>.</p>
-	<h1>Confirmer la réservation</h1>
-	<form action="confirmation.php" method="POST" onsubmit="return verifForm(this)"> 
-		<input type="hidden" name="hotel" value="<?= htmlspecialchars($_POST["hotel"]); ?>">
-		<input type="hidden" name="chambre" value="<?= htmlspecialchars($_POST["chambre"]); ?>">
-		<input type="hidden" name="dateDebut" value="<?= htmlspecialchars($_POST["dateDebut"]); ?>">
-		<input type="hidden" name="dateFin" value="<?= htmlspecialchars($_POST["dateFin"]); ?>">
-		<input type="hidden" name="prixTotal" value="<?= $_POST["prixTotal"]; ?>">
-		<input type="hidden" name="nomHotel" value="<?= $nomHotel["nom"]; ?>">
-		<input class="infos" type="text" name="nom" placeholder="Nom" onblur="verifText(this)" />
-		<input class="infos" type="text" name="prenom" placeholder="Prenom" onblur="verifText(this)" />
-		<input class="infos" type="text" name="mail" placeholder="Mail" onblur="verifMail(this)" />
-		<input class="infos" type="text" name="telephone" placeholder="Telephone" onblur="verifText(this)">
-		<input type="submit" value="Confirmer la réservation">
-	</form>
 </body>
 </html>

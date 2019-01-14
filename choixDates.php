@@ -1,4 +1,5 @@
 <?php
+session_start();
 // s'il n'y a pas de paramètre, ou si c'est une mauvaise valeur
 if(EMPTY($_GET["hotel"]) || !is_numeric($_GET["hotel"]))
 {
@@ -6,6 +7,7 @@ if(EMPTY($_GET["hotel"]) || !is_numeric($_GET["hotel"]))
 	header('Location: ./index.php');
 }
 
+$_SESSION["hotel"] = $_GET["hotel"];
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +47,6 @@ $res = $stm->fetch();
 		<!-- adds info about the hotel -->
 	</header>
 	<form method="POST" action="chambres.php">
-		<input type="hidden" name="hotel" value="<?= $res["id"]; ?>">
 		Date de début : <input id="dateDbt" type="date" name="dateStart" min="<?php echo date('Y-m-d');?>">
 		Date de fin : <input id="dateFin" type="date" name="dateEnd">
 		<input type="submit">

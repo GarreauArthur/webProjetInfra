@@ -3,7 +3,7 @@
 include_once('dbConnection.php'); 
 
 $query = $connection->query("SELECT * FROM hotels");
-$res = $query->fetchAll()
+$res = $query->fetchAll();
 
 ?>
 <!DOCTYPE html>
