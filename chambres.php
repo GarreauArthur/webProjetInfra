@@ -28,7 +28,7 @@ else {
 }
 
 // on se connecte à la base de données
-include_once('./dbconnection.php');
+include_once('./dbConnection.php');
 // on récupère les infos
 $stm = $connection->prepare("SELECT * FROM Chambres WHERE hotel = :hotel AND numeroChambre NOT IN (SELECT chambre FROM Reservations WHERE hotel = :hotel AND (dateDebut < :dEnd) AND (dateFin > :dStart ))");
 $stm->execute(array(

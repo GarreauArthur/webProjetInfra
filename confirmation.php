@@ -17,7 +17,7 @@ if ( EMPTY($_SESSION["hotel"])     || !is_numeric($_SESSION["hotel"])
 //include_once('./mail.php');
 
 // on se connecte à la base de données
-include_once('./dbconnection.php');
+include_once('./dbConnection.php');
 
 // on vérifie que personne n'a réservé la chambre entre temps
 $numeroChambre = $connection->prepare("SELECT numeroChambre FROM Chambres WHERE hotel = :hotel AND numeroChambre NOT IN (SELECT chambre FROM Reservations WHERE hotel = :hotel AND (dateDebut < :dEnd) AND (dateFin > :dStart ))");

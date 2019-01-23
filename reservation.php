@@ -11,7 +11,7 @@ if ( EMPTY($_SESSION["hotel"])     || !is_numeric($_SESSION["hotel"])
 }
 
 // on se connecte à la base de données
-include_once('./dbconnection.php');
+include_once('./dbConnection.php');
 
 $stm = $connection->prepare(
 	"SELECT * FROM Chambres INNER JOIN Hotels ON Hotels.id = Chambres.hotel"
