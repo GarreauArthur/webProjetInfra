@@ -20,11 +20,6 @@ $_SESSION["hotel"] = $_GET["hotel"];
 <body>
 
 <?php
-if (!EMPTY($_GET["msg"]) && $_GET["msg"]=="error"){
-?>
-	<h1 style="color: red"> Erreur : dates invalides, veuillez en choisir de nouvelles.</h1>
-<?php
-}
 
 // on se connecte à la base de données
 include_once('./dbconnection.php');
@@ -42,14 +37,18 @@ $res = $stm->fetch();
 ?>
 
 	<header>
-		<h1>Obtenez la meilleure expérience dans nos hôtels</h1>
-		<h2>Sélectionnez vos dates de réservation</h2>
+		<h1>Dates</h1>
+		<h2>Obtenez la meilleure expérience dans nos hôtels</h2>
+		<h3>Sélectionnez vos dates de réservation</h3>
 		<!-- adds info about the hotel -->
 	</header>
 	<form method="POST" action="chambres.php">
-		Date de début : <input id="dateDbt" type="date" name="dateStart" min="<?php echo date('Y-m-d');?>">
-		Date de fin : <input id="dateFin" type="date" name="dateEnd">
-		<input type="submit">
+		<div class="dates">
+			<div class="input-dates">Date de début : <input id="dateDbt" type="date" name="dateStart" min="<?php echo date('Y-m-d');?>"></div>
+			<div class="input-dates">Date de fin : <input id="dateFin" type="date" name="dateEnd"></div>
+			<div class="input-dates"><input class="submit" type="submit"></div>
+		</div>
+		
 	</form>
 
 	<script>

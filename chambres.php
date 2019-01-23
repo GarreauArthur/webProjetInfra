@@ -22,16 +22,6 @@ else {
 	// On sait que 1 heure = 60 secondes * 60 minutes et que 1 jour = 24 heures donc :
 	$nbNuits = $nbNuitsTimestamp/86400; // 86 400 = 60*60*24
 
-	// Date d'aujourd'hui
-
-	$dateNow = strtotime("today");
-	
-	// TEST : date de début supérieur à date de fin -> message d'erreur
-	// TEST : date de début ou de fin inférieure(s) à celle d'aujourd'hui -> message d'erreur
-	
-	if ($nbNuits < 0 || $dateStart < $dateNow || $dateEnd < $dateNow){
-		header('Location: ./choixDates.php?hotel='.$_SESSION["hotel"].'&msg=error');
-	}
 	// on sauvegarde les données dans la session
 	$_SESSION["dateDebut"] = $_POST["dateStart"];
 	$_SESSION["dateFin"]   = $_POST["dateEnd"];
@@ -62,39 +52,57 @@ $stm->execute(array(
 <?php 
 $nbAvailable = $stm->rowCount();
 if( $nbAvailable == 0) : ?>
-	<h1>Pas de chambres disponibles pour cette période</h1>
+	<h1>Disponibilité</h1>
+	<h2>Pas de chambres disponibles pour cette période</h2>
+	<div class="liens">
+		<a href="choixDates.php?hotel=<?php echo $_SESSION["hotel"]?>">Choisir de nouvelles dates de réservation</a>
+		<br/><br/>
+		<a href="index.php">Choisir un nouvel hôtel</a>
+	</div>
 <?php else : 
-	echo '<h1>Il y a '.$nbAvailable.' chambre(s) disponible(s)</h1>';
+	echo '<h1>Disponibilité</h1>';
+	echo '<h2>Il y a '.$nbAvailable.' chambre(s) disponible(s)</h2>';
 	$res = $stm->fetchAll();
 	function toInt($str) // fonction qui transforme un prix (money) en nombre (int)
 	{
 		return preg_replace("/([^0-9\\.])/i", "", $str);
 	}
 	setlocale(LC_MONETARY, 'en_US'); // pour les dolls
+	?>
+	<div class="list-chambres">
+	<?php 
 	
 	foreach ($res as $val) { ?>
 
 		<div class="chambre">
-	    	<i class="fas fa-bed"></i>
-		    Numéro chambre : <?= $val["numerochambre"]; ?><br>
-			nbLitSimple : <?= $val["nblitsimple"]; ?><br>
-			nbLitDouble : <?= $val["nblitdouble"]; ?><br>
-			prix : <?= $val["prix"]; ?><br>
-			prix total pour <?= $nbNuits; ?> nuits : <?= $prixTotal = money_format('%.2n',toInt($val["prix"])*$nbNuits); ?><br>
-			gammeChambre : <?= $val["gammechambre"]; ?><br>
-			etage: <?= $val["etage"]; ?><br>
+			<div class="chambre-element">
+				<p><i class="fas fa-bed"></i>
+				Numéro chambre : <?= $val["numerochambre"]; ?></p>
+				<p>nombre de lit simple : <?= $val["nblitsimple"]; ?></p>
+				<p>nombre de lit double : <?= $val["nblitdouble"]; ?></p>
+				<p>prix : <?= $val["prix"]; ?></p>
+				<p>prix total pour <?= $nbNuits; ?> nuits : <?= $prixTotal = money_format('%.2n',toInt($val["prix"])*$nbNuits); ?></p>
+				<p>gamme de la chambre : <?= $val["gammechambre"]; ?></p>
+				<p>etage: <?= $val["etage"]; ?></p>
+			</div>
 
-			<form method="POST" action="reservation.php">
-				<input type="hidden" name="hotel"     value="<?= $val["hotel"]; ?>">
-				<input type="hidden" name="chambre"   value="<?= $val["numerochambre"]; ?>">
-				<input type="hidden" name="prixTotal" value="<?= $prixTotal; ?>">
-				<input type="submit" value="Réserver">
-			</form>
+			<div class="chambre-element">
+				<div class="chambre-element-absolute">
+				<form method="POST" action="reservation.php">
+					<input type="hidden" name="hotel"     value="<?= $val["hotel"]; ?>">
+					<input type="hidden" name="chambre"   value="<?= $val["numerochambre"]; ?>">
+					<input type="hidden" name="prixTotal" value="<?= $prixTotal; ?>">
+					<input class="submit-blue" type="submit" value="Réserver">
+				</form>
+				</div>
+
+			</div>
 	    </div>
-
+	
 <?php
 
 	}//foreach
+	
 
 endif; ?>
 

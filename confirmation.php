@@ -14,7 +14,7 @@ if ( EMPTY($_SESSION["hotel"])     || !is_numeric($_SESSION["hotel"])
 	header('Location: ./index.php');
 }
 
-include_once('./mail.php');
+//include_once('./mail.php');
 
 // on se connecte à la base de données
 include_once('./dbconnection.php');
@@ -52,7 +52,9 @@ foreach ($numeroChambreDisponible as $numero){
 
 if( !$estDisponible) : ?>
 	<h1>Dommage ! Quelqu'un a réservé cette chambre pendant que vous vous identifiiez...</h1>
-	<a href="choixDates.php?hotel=<?php echo $_SESSION["hotel"]?>">Choisir de nouvelles dates</a>
+	<a href="choixDates.php?hotel=<?php echo $_SESSION["hotel"]?>">Choisir de nouvelles dates de réservation</a>
+	<br/><br/>
+	<a href="choixDates.php">Choisir un nouvel hôtel</a>
 
 <?php else : 
 
@@ -103,6 +105,10 @@ try {
 	        ':chambre'   => $_SESSION["chambre"]
 		    )
 		);
+
+		$idReservation = $connection->lastInsertId("reservations_id_seq");
+		$_SESSION["reservation"]=$idReservation;
+		
 		// si la requête a échoué
 		if ( !$res ) {
 			$error = true;
@@ -136,8 +142,9 @@ if ( $error ) : ?>
 	<h2> Détail de réservation :</h2>
 	<p> Vous avez choisi la chambre <?php echo htmlspecialchars($_SESSION["chambre"])?> de l'hôtel <?php echo htmlspecialchars($_SESSION["nomHotel"])?> !</p>
 	<p> Vous l'avez réservé au nom de <strong><?php echo htmlspecialchars($_POST["prenom"])?> <?php echo htmlspecialchars($_POST["nom"])?></strong> du <?php echo $dateDebutReformate?> au <?php echo $dateFinReformate?>.</p>
-	<p> Son prix est de <?php echo htmlspecialchars($_SESSION["prixTotal"])?>.</p>
-	<p> L'équipe <strong>Bangaloducul</strong> vous souhaite un bon séjour !</p>
+	<p> Le prix de votre réservation est de <?php echo htmlspecialchars($_SESSION["prixTotal"])?>.</p>
+	<p> L'équipe <strong>Eseotel</strong> vous souhaite un bon séjour !</p>
+	<a href="annuler.php">Annuler la réservation</a>
 
 <?php endif;
 endif;?>

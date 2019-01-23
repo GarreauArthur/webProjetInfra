@@ -10,7 +10,7 @@ $res = $query->fetchAll();
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>hothell</title>
+	<title>eseotel</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="./lecss.css">
 
@@ -19,8 +19,9 @@ $res = $query->fetchAll();
 
 
 	<header>
-		<h1>Obtenez la meilleure expérience dans nos hôtels</h1>
-		<h2>Choisissez celui dans lequel vous voulez rester</h2>
+		<h1> ESEOTEL
+		<h2>Obtenez la meilleure expérience dans nos hôtels</h2>
+		<h3>Choisissez celui dans lequel vous voulez rester</h3>
 	</header>
 
 	<div id="listHotels"><!--

@@ -1,17 +1,72 @@
 body{
 	margin:auto;
 	width: 760px;
+	background-color: #7CBFDA;
+	color: #fbfbfb;
 }
+
+h1{
+	font-size: 4em;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+
+h2{
+	font-size: 1.8em;
+	margin: 0px;
+}
+
+.dates{
+	margin-top: 40px;
+	text-align: center;
+	display: flex;
+	justify-content: space-evenly;
+
+}
+
+.input-dates{
+	width: 33.333%;
+}
+
+input{
+	font-size: 1em;
+	max-width: 140px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.submit-button{
+	margin-top: 20px;
+	text-align: center;
+}
+
+.submit{
+	background-color: #DB7A7A;
+	color: white;
+	padding: 4px 10px;
+}
+
+.submit-blue{
+	background-color: #7CBFDA;
+	color: white;
+	padding: 4px 10px;
+}
+
+.liens{
+	margin-top: 20px;
+}
+
 .hotel{
-	background-color: #6161ff;
+	background-color: #DB7A7A;
 	width:240px;
-	min-height: 250px;
+	min-height: 240px;
 	text-align: center;
 	color:white;
 	display: inline-block;
 	vertical-align: top;
 	margin:5px;
 }
+
 .fa-hotel{font-size: 100px}
 header{
 	text-align: center;
@@ -24,11 +79,34 @@ a{
 	display: flex;
 	flex-wrap:wrap;
 }
+
+.list-chambres{
+	margin-top: 25px;
+}
 .chambre{
-	background-color: #fb3f3f;
+	background-color: #DB7A7A;
 	color:white;
 	margin:5px;
-	padding: 5px;
+	padding: 20px;
+	display: flex;
+}
+
+
+.chambre-element{
+	width: 75%;
+	position: relative;
+}
+
+
+p{
+	margin: 6px 1px;
+}
+.chambre-element-absolute{
+	position: absolute;
+	top: 50%; /* poussé de la moitié de hauteur du référent */
+	left: 50%;
+	transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+
 }
 .infos{
 	display: block;
