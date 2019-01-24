@@ -17,9 +17,8 @@ $res = $query->fetchAll();
 </head>
 <body>
 
-
 	<header>
-		<h1> ESEOTEL
+		<h1> ESEOTEL</h1>
 		<h2>Obtenez la meilleure expérience dans nos hôtels</h2>
 		<h3>Choisissez celui dans lequel vous voulez rester</h3>
 	</header>
