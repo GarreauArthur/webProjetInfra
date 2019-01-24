@@ -37,6 +37,7 @@ $numeroChambreDisponible = $numeroChambre->fetchAll(); // récupération des num
 	<title>Confirmation</title>
 	<link rel="stylesheet" type="text/css" href="./lecss.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+	<link rel="shortcut icon" href="./fav.ico" type="image/x-icon">
 </head>
 <body>
 

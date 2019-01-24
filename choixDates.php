@@ -16,6 +16,7 @@ $_SESSION["hotel"] = $_GET["hotel"];
 	<meta charset="UTF-8">
 	<title>Choix dates</title>
 	<link rel="stylesheet" type="text/css" href="./lecss.css">
+	<link rel="shortcut icon" href="./fav.ico" type="image/x-icon">
 </head>
 <body>
 
