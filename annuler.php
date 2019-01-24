@@ -14,7 +14,7 @@ if ( EMPTY($_SESSION["hotel"])     || !is_numeric($_SESSION["hotel"])
 //include_once('./mail.php');
 
 // on se connecte à la base de données
-include_once('./dbconnection.php');
+include_once('./dbConnection.php');
 
 ?>
 

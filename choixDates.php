@@ -22,7 +22,7 @@ $_SESSION["hotel"] = $_GET["hotel"];
 <?php
 
 // on se connecte à la base de données
-include_once('./dbconnection.php');
+include_once('./dbConnection.php');
 // on récupère les infos
 $stm = $connection->prepare("SELECT * FROM hotels WHERE id = ?");
 $stm->execute(array($_GET["hotel"]));
