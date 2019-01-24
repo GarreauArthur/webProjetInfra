@@ -44,8 +44,8 @@ $res = $stm->fetch();
 	</header>
 	<form method="POST" action="chambres.php">
 		<div class="dates">
-			<div class="input-dates">Date de début : <input id="dateDbt" type="date" name="dateStart" min="<?php echo date('Y-m-d');?>"></div>
-			<div class="input-dates">Date de fin : <input id="dateFin" type="date" name="dateEnd"></div>
+			<div class="input-dates">Date de début : <input class="input" id="dateDbt" type="date" name="dateStart" min="<?php echo date('Y-m-d');?>"></div>
+			<div class="input-dates">Date de fin : <input class="input" id="dateFin" type="date" name="dateEnd"></div>
 			<div class="input-dates"><input class="submit" type="submit"></div>
 		</div>
 		

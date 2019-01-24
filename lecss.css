@@ -1,8 +1,11 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,400,700,800,900);
+
 body{
 	margin:auto;
 	width: 760px;
 	background-color: #7CBFDA;
 	color: #fbfbfb;
+	font-family: Roboto, Oxygen, Ubuntu, Cantarell;
 }
 
 h1{
@@ -21,16 +24,16 @@ h2{
 	text-align: center;
 	display: flex;
 	justify-content: space-evenly;
-
+	
 }
 
 .input-dates{
 	width: 33.333%;
 }
 
-input{
+.input{
 	font-size: 1em;
-	max-width: 140px;
+	max-width: 130px;
 	padding-top: 1px;
 	padding-bottom: 1px;
 }
@@ -43,28 +46,60 @@ input{
 .submit{
 	background-color: #DB7A7A;
 	color: white;
-	padding: 4px 10px;
+	padding: 3px 10px;
+	border: 1px solid white;
+	font-size: 1em;
+}
+
+.submit-confirm{
+	background-color: #DB7A7A;
+	color: white;
+	padding: 6px 10px;
+	border: 1px solid white;
+	font-size: 1em;
+	margin-top: 10px;
 }
 
 .submit-blue{
 	background-color: #7CBFDA;
 	color: white;
-	padding: 4px 10px;
+	padding: 6px 10px;
+	border: 1px solid white;
+	font-size: 1em;
 }
 
 .liens{
 	margin-top: 20px;
+	display: flex;
+	justify-content: space-evenly;
+}
+
+.bouton-lien{
+	background-color: #DB7A7A;
+	color: white;
+	border: 1px solid white;
+	padding: 6px;
+}
+
+.lien-hotel{
+	background-color: #DB7A7A;
+	width:250px;
+	min-height: 250px;
+	color:white;
+	display: inline-block;
+	margin:10px;
+	position: relative;
+	border: 1px solid white;
 }
 
 .hotel{
-	background-color: #DB7A7A;
-	width:240px;
-	min-height: 240px;
+	width: 200px;
+	height: 200px;
+	position: absolute;
+	top: 50%; /* poussé de la moitié de hauteur du référent */
+	left: 50%; /* poussé de la moitié de hauteur du référent */
+	transform: translateX(-50%) translateY(-50%);
 	text-align: center;
-	color:white;
-	display: inline-block;
-	vertical-align: top;
-	margin:5px;
 }
 
 .fa-hotel{font-size: 100px}
@@ -74,10 +109,13 @@ header{
 a{
 	text-decoration:none;
 }
+
 #listHotels{
 	margin:auto;
+	padding-bottom: 20px;
 	display: flex;
 	flex-wrap:wrap;
+	justify-content: center;
 }
 
 .list-chambres{
@@ -88,9 +126,19 @@ a{
 	color:white;
 	margin:5px;
 	padding: 20px;
+	margin-bottom: 10px;
 	display: flex;
+	border: 1px solid white;
 }
 
+.chambre:last-child{
+	background-color: #DB7A7A;
+	color:white;
+	margin:5px;
+	padding: 20px;
+	margin-bottom: 20px;
+	display: flex;
+}
 
 .chambre-element{
 	width: 75%;
@@ -99,7 +147,7 @@ a{
 
 
 p{
-	margin: 6px 1px;
+	margin: 12px 1px;
 }
 .chambre-element-absolute{
 	position: absolute;
@@ -108,17 +156,27 @@ p{
 	transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
 
 }
+
 .infos{
 	display: block;
 	box-sizing: border-box;
 	border: 1px solid #eeeeee;
-	margin:5px;
-	font-family: 'Ubuntu', sans-serif;
+	margin:5px 0;
 	font-size: 16px;
 	padding: 10px;
 	transition: box-shadow 0.3s ease 0s, border 0.3s ease 0s;
 	width: 100%;
-	display: inline-block;
 	vertical-align: top;
 	background-color: #fbfbfb;
 }
+.recap{
+	background-color: #DB7A7A;
+	border: 1px solid white;
+	margin-left: auto;
+  	margin-right: auto;
+	width: 450px;
+	padding: 40px 20px;
+	font-size: 1.2em;
+}
+
+

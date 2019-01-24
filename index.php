@@ -24,19 +24,21 @@ $res = $query->fetchAll();
 		<h3>Choisissez celui dans lequel vous voulez rester</h3>
 	</header>
 
-	<div id="listHotels"><!--
+	<div id="listHotels">
 
 	<?php foreach ($res as $val) { ?>
-		--><a href="choixDates.php?hotel=<?=$val['id'] ?>" class="hotel"><!--
-			--><div><!--
-				--><p><?=$val['nom'] ?></p><!--
-				--><i class="fas fa-hotel"></i><!--
-				--><p><?=$val['adresse'] ?></p><!--
-			--></div><!--
-		--></a><!--
+		
+		<a href="choixDates.php?hotel=<?=$val['id'] ?>" class="lien-hotel">
+			<div class="hotel">
+				<p><?=$val['nom'] ?></p>
+				<i class="fas fa-hotel"></i>
+				<p><?=$val['adresse'] ?></p>
+			</div>
+		</a>
+	
 	<?php
 	}
 	?>
-	--></div>
+	</div>
 </body>
 </html>

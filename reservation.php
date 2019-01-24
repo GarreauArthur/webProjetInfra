@@ -53,18 +53,24 @@ $_SESSION["nomHotel"]  = $nomHotel["nom"];
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
 </head>
 <body>
-	<h1> Votre réservation :</h1>
-	<p> Vous avez choisi la chambre <?php echo htmlspecialchars($_POST["chambre"])?> de l'hôtel <?php echo $nomHotel["nom"]?> !</p>
-	<p> Date de réservation : <?php echo $dateDebutReformate?> à <?php echo $dateFinReformate?>.</p>
-	<p> Prix à payer : <?php echo htmlspecialchars($_POST["prixTotal"]) ?>.</p>
-	<h1>Confirmer la réservation</h1>
-	<form action="confirmation.php" method="POST" onsubmit="return verifForm(this)">
-		<input class="infos" type="text" name="nom" placeholder="Nom" onblur="verifText(this)" />
-		<input class="infos" type="text" name="prenom" placeholder="Prenom" onblur="verifText(this)" />
-		<input class="infos" type="text" name="mail" placeholder="Mail" onblur="verifMail(this)" />
-		<input class="infos" type="text" name="telephone" placeholder="Telephone" onblur="verifText(this)">
-		<input type="submit" value="Confirmer la réservation">
-	</form>
+   <header>
+      <h1> Votre réservation !</h1>
+      <div class="recap">
+         <p> Vous avez choisi la chambre <?php echo htmlspecialchars($_POST["chambre"])?> de l'hôtel <?php echo $nomHotel["nom"]?> !</p>
+         <p> Date de réservation : <?php echo $dateDebutReformate?> à <?php echo $dateFinReformate?>.</p>
+         <p> Prix à payer : <?php echo htmlspecialchars($_POST["prixTotal"]) ?>.</p>
+      </div>
+   </header>
+   <h2 style="margin:30px 0 10px 0">Confirmer la réservation</h2>
+   
+   <form class="form-infos" action="confirmation.php" method="POST" onsubmit="return verifForm(this)">
+      <input class="infos" type="text" name="nom" placeholder="Nom" onblur="verifText(this)" />
+      <input class="infos" type="text" name="prenom" placeholder="Prenom" onblur="verifText(this)" />
+      <input class="infos" type="text" name="mail" placeholder="Mail" onblur="verifMail(this)" />
+      <input class="infos" type="text" name="telephone" placeholder="Telephone" onblur="verifText(this)">
+      <input class="submit-confirm" type="submit" value="Confirmer la réservation">
+   </form>
+   
 <script type="text/javascript">
 
 function surligne(champ, erreur) //colorie en rouge les champs invalides

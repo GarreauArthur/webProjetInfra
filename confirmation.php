@@ -51,10 +51,13 @@ foreach ($numeroChambreDisponible as $numero){
 }
 
 if( !$estDisponible) : ?>
-	<h1>Dommage ! Quelqu'un a réservé cette chambre pendant que vous vous identifiiez...</h1>
-	<a href="choixDates.php?hotel=<?php echo $_SESSION["hotel"]?>">Choisir de nouvelles dates de réservation</a>
-	<br/><br/>
-	<a href="choixDates.php">Choisir un nouvel hôtel</a>
+	<h1>Dommage ! </h1>
+	<h2>Quelqu'un a réservé cette chambre pendant que vous vous identifiiez...</h2>
+	<br/>
+	<div class="liens">
+		<a class="bouton-lien" href="choixDates.php?hotel=<?php echo $_SESSION["hotel"]?>">Choisir de nouvelles dates de réservation</a>
+		<a class="bouton-lien" href="index.php">Choisir un nouvel hôtel</a>
+	</div>
 
 <?php else : 
 
@@ -138,13 +141,22 @@ if ( $error ) : ?>
 	<h1>ERREUR</h1>
 	<h2>Il y a eu une erreur veuillez <a href="index.php">recommencer</a></h2>
 <?php else : ?>
+
 	<h1>Votre réservation a été enregistrée</h1>
-	<h2> Détail de réservation :</h2>
-	<p> Vous avez choisi la chambre <?php echo htmlspecialchars($_SESSION["chambre"])?> de l'hôtel <?php echo htmlspecialchars($_SESSION["nomHotel"])?> !</p>
-	<p> Vous l'avez réservé au nom de <strong><?php echo htmlspecialchars($_POST["prenom"])?> <?php echo htmlspecialchars($_POST["nom"])?></strong> du <?php echo $dateDebutReformate?> au <?php echo $dateFinReformate?>.</p>
-	<p> Le prix de votre réservation est de <?php echo htmlspecialchars($_SESSION["prixTotal"])?>.</p>
-	<p> L'équipe <strong>Eseotel</strong> vous souhaite un bon séjour !</p>
-	<a href="annuler.php">Annuler la réservation</a>
+	<div class="recap">
+		<h2> Détail de réservation :</h2>
+		<p> Vous avez choisi la chambre <?php echo htmlspecialchars($_SESSION["chambre"])?> de l'hôtel <?php echo htmlspecialchars($_SESSION["nomHotel"])?> !</p>
+		<p> Vous l'avez réservé au nom de <strong><?php echo htmlspecialchars($_POST["prenom"])?> <?php echo htmlspecialchars($_POST["nom"])?></strong> du <?php echo $dateDebutReformate?> au <?php echo $dateFinReformate?>.</p>
+		<p> Le prix de votre réservation est de <?php echo htmlspecialchars($_SESSION["prixTotal"])?>.</p>
+		<p> L'équipe <strong>Eseotel</strong> vous souhaite un bon séjour !</p>
+	</div>
+	
+
+	<div class="liens">
+		<a class="bouton-lien" href="annuler.php">Annuler la réservation</a>
+		<a class="bouton-lien" href="index.php">Accueil</a>
+	</div>
+
 
 <?php endif;
 endif;?>

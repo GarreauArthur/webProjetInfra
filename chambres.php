@@ -52,16 +52,22 @@ $stm->execute(array(
 <?php 
 $nbAvailable = $stm->rowCount();
 if( $nbAvailable == 0) : ?>
-	<h1>Disponibilité</h1>
-	<h2>Pas de chambres disponibles pour cette période</h2>
+	<header>
+		<h1>Disponibilité</h1>
+		<h2>Pas de chambres disponibles pour cette période</h2>
+	</header>
+	<br/>
 	<div class="liens">
-		<a href="choixDates.php?hotel=<?php echo $_SESSION["hotel"]?>">Choisir de nouvelles dates de réservation</a>
-		<br/><br/>
-		<a href="index.php">Choisir un nouvel hôtel</a>
+		<a class="bouton-lien" href="choixDates.php?hotel=<?php echo $_SESSION["hotel"]?>">Choisir de nouvelles dates de réservation</a>
+		<a class="bouton-lien" href="index.php">Choisir un nouvel hôtel</a>
 	</div>
 <?php else : 
-	echo '<h1>Disponibilité</h1>';
-	echo '<h2>Il y a '.$nbAvailable.' chambre(s) disponible(s)</h2>';
+	?>
+	<header>
+		<h1>Disponibilité</h1>
+		<h2>Il y a <?php echo $nbAvailable ?> chambre(s) disponible(s)</h2>
+	</header>
+<?php
 	$res = $stm->fetchAll();
 	function toInt($str) // fonction qui transforme un prix (money) en nombre (int)
 	{
