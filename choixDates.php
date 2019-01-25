@@ -6,7 +6,7 @@ if(EMPTY($_GET["hotel"]) || !is_numeric($_GET["hotel"]))
 	// on retourne à la page d'accueil
 	header('Location: ./index.php');
 }
-
+// on enregistre la valeur dans la session
 $_SESSION["hotel"] = $_GET["hotel"];
 ?>
 
@@ -60,10 +60,10 @@ $res = $stm->fetch();
 		}
 		var dateDbt = document.getElementById("dateDbt");
 		var dateFin = document.getElementById("dateFin");
+		// lorsque l'utilisateur sélectionne une date de début
 		dateDbt.addEventListener("input", function (e){
-			console.log("bla");
+			// on grise les dates précédentes à la date de début
 			dateFin.min = addDays(dateDbt.value, 1).toISOString().substring(0,10);
-			console.log(dateFin.min);
 		});
 	</script>
 

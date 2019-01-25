@@ -24,7 +24,7 @@ $res = $query->fetchAll();
 	</header>
 
 	<div id="listHotels">
-
+	<!-- affichage de la liste des hôtels -->
 	<?php foreach ($res as $val) { ?>
 		
 		<a href="choixDates.php?hotel=<?=$val['id'] ?>" class="lien-hotel">
